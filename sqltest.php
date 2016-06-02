@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli('DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME');
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 $query = "SELECT * FROM books";
 #$query = "SELECT title FROM books";
