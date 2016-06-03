@@ -1,24 +1,29 @@
+<!DOCTYPE html>
 <?php
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 $query = "SELECT * FROM books";
 #$query = "SELECT title FROM books";
+?>
 
-#insert css to format the table as desired.
-#echo '<link href="style.css" type="text/css" rel="style.css">' . "\n";
-#echo '<style><table{border-color:black; border-width:2px; border-style:solid; border-collapse:collapse; text-align:left;}</style>';
+<html>
+<head>
 
-echo "<title>Library</title>\n";
+<link href="style.css" type="text/css" rel="stylesheet">
 
-#make a title bar denoting what is displayed
-echo "<h2>Welcome to the Library</h2>\n";
+<title>Library</title>
 
+</head>
+
+<body>
+<h2>Welcome to the Library</h2>
+
+<?php
 if($result = $mysqli->query($query))
 {
     #begin table, make the column headings
-    #echo "<table class = 'table'><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
-    echo "<table style='border-color:black;border-width:2px;border-style:solod;border-collapse:collapse;text-align:left;'><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
+    echo "<table><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
         # of the above line of code, the text-align function works.
 
         #while loop to run through and print all the data in the books table
@@ -37,3 +42,6 @@ if($result = $mysqli->query($query))
     #if the database is empty
     echo "The databasse is empty";
 }
+?>
+</body>
+</html>

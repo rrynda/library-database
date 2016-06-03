@@ -5,4 +5,13 @@ table
     border-style: solid;
     border-collapse: collapse;
     text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+td,
+th
+{
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
