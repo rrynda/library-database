@@ -8,10 +8,11 @@ $query = "SELECT * FROM books";
 echo "<title>Library</title>";
 
 #make a title bar denoting what is displayed
-echo "<h2>Book_ID\tTitle\tYear_Published\tShelf_ID</h2>\n";
+echo "<h2>Welcome to the Library</h2>\n";
 
 if($result = $mysqli->query($query))
 {
+    echo "<h4>Book_ID\tTitle\tYear_Published\tShelf_ID</h4>\n";
     #while loop to run through and print all the data in the books table
     while($row = $result->fetch_assoc())
     {
