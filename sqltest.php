@@ -5,6 +5,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 $query = "SELECT * FROM books";
 #$query = "SELECT title FROM books";
 
+echo "<title>Library</title>";
+
 #make a title bar denoting what is displayed
 echo "<h2>Book_ID\tTitle\tYear_Published\tShelf_ID</h2>\n";
 
