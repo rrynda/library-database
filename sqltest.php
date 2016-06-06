@@ -75,7 +75,7 @@ if ($result = $mysqli->query($query))
 }
 else
 {
-    echo "The database is empty";
+    echo "Query failed:" . $mysqli->error();
 }
 ?>
 </body>
