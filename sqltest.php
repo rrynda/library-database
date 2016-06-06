@@ -36,7 +36,7 @@ $shelf_id_d ="http://rrynda.wiktel.com/sort/shelf_id_d.php";
 $asc = "https://imp.wiktel.com/media/img/admin/arrow-down.gif";
 $desc = "https://imp.wiktel.com/media/img/admin/arrow-up.gif";
 
-if($result = $mysqli->query($query))
+if ($result = $mysqli->query($query))
 {
     #begin table, make the column headings
     #echo "<table><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
@@ -48,7 +48,7 @@ if($result = $mysqli->query($query))
 
 
         #while loop to run through and print all the data in the books table
-        while($row = $result->fetch_assoc())
+        while ($row = $result->fetch_assoc())
         {
             #print_r($row);
             #echo "<h2>Title: </h2>" . $row["title"] . "<br>\n";
@@ -58,7 +58,8 @@ if($result = $mysqli->query($query))
         }
     #close table
     echo "</table>"; 
-} else
+}
+else
 {
     #if the database is empty
     echo "The database is empty";
