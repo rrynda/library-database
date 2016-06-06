@@ -61,7 +61,7 @@ if($result = $mysqli->query($query))
 } else
 {
     #if the database is empty
-    echo "The databasse is empty";
+    echo "The database is empty";
 }
 ?>
 </body>
