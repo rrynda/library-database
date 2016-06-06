@@ -2,9 +2,6 @@
 <?php
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-$query = "SELECT * FROM books ORDER BY id";
-#$query = "SELECT title FROM books";
 ?>
 
 <html>
@@ -23,29 +20,51 @@ $query = "SELECT * FROM books ORDER BY id";
 
 <?php
 
-#make variables for all of the links to sorting pages
-$book_id_a = "http://rrynda.wiktel.com/sqltest.php";
-$book_id_d = "http://rrynda.wiktel.com/sort/book_id_d.php";
-$title_a = "http://rrynda.wiktel.com/sort/title_a.php";
-$title_d = "http://rrynda.wiktel.com/sort/title_d.php";
-$year_published_a = "http://rrynda.wiktel.com/sort/year_published_a.php";
-$year_published_d = "http://rrynda.wiktel.com/sort/year_published_d.php";
-$shelf_id_a ="http://rrynda.wiktel.com/sort/shelf_id_a.php";
-$shelf_id_d ="http://rrynda.wiktel.com/sort/shelf_id_d.php";
-#make variables for the images displayed
-$asc = "https://imp.wiktel.com/media/img/admin/arrow-down.gif";
-$desc = "https://imp.wiktel.com/media/img/admin/arrow-up.gif";
+function print_column_header($name, $description)
+{
+    global $sort;
+    global $dir;
 
+    echo "<th><a href='?sort=$name";
+    if ($sort == $name)
+    {
+        echo "&amp;dir=" . ($dir ? "0" : "1");
+        echo "'>$description";
+        echo " <img src='https://imp.wiktel.com/media/img/admin/arrow-" . ($dir ? "down" : "up") . ".gif'>";
+    }
+    else
+    {
+        echo "'>$description";
+    }
+    echo "</a></th>";
+}
+
+$sort = "id";
+$dir = 1;
+$sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
+if (array_key_exists("sort", $_REQUEST) &&
+    array_search($_REQUEST["sort"], $sortable_columns))
+{
+    $sort = $_REQUEST["sort"];
+}
+if (array_key_exists("dir", $_REQUEST) &&
+    $_REQUEST["dir"] == "0")
+{
+    $dir = 0;
+}
+
+$query = "SELECT * FROM books ORDER BY $sort";
+if ($dir == 0)
+{
+    $query .= " DESC";
+}
 if ($result = $mysqli->query($query))
 {
-    #begin table, make the column headings
-    #echo "<table><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
-    #echo "<table><tr><th>Book ID<select name="sort"><option value='ascending'><option value='descending'></th> <th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
-    echo "<table><tr><th><a href='$book_id_d'>Book ID<img src='$asc'></a></th>
-    <th><a href='$title_a'>Titles<img src='$asc'></a></th>
-    <th><a href='$year_published_a'>Year Published<img src='$asc'></a></th>
-    <th><a href='$shelf_id_a'>Shelf ID<img src='$asc'></a></th></tr>\n";
-
+    echo "<table><tr>";
+    print_column_header("id", "Book ID");
+    print_column_header("title", "Title");
+    print_column_header("year_published", "Year Published");
+    print_column_header("shelf_id", "Shelf ID");
 
         # loop over each book row
         while ($row = $result->fetch_assoc())
