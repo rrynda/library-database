@@ -3,7 +3,7 @@
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-$query = "SELECT * FROM books ORDER BY shelf_id DESC";
+$query = "SELECT * FROM books ORDER BY shelf_id ASC";
 ?>
 
 <html>
@@ -11,7 +11,7 @@ $query = "SELECT * FROM books ORDER BY shelf_id DESC";
 
 <link href="../style.css" type="text/css" rel="stylesheet">
 
-<title>Shelf ID Desc</title>
+<title>Shelf ID Asc</title>
 
 </head>
 
@@ -41,7 +41,7 @@ if($result = $mysqli->query($query))
     echo "<table><tr><th><a href='$book_id_a'>Book ID</a><img src='$asc'></th>
     <th><a href='$title_a'>Titles</a><img src='$asc'></th>
     <th><a href='$year_published_a'>Year Published</a><img src='$asc'></th>
-    <th><a href='$shelf_id_a'>Shelf ID</a><img src='$desc'></th></tr>\n";
+    <th><a href='$shelf_id_d'>Shelf ID</a><img src='$asc'></th></tr>\n";
 
         #while loop to run through and print all the data in the books table
         while($row = $result->fetch_assoc())
@@ -55,3 +55,4 @@ if($result = $mysqli->query($query))
     #if the database is empty
     echo "The database is empty";
 }
+
