@@ -41,10 +41,10 @@ if($result = $mysqli->query($query))
     #begin table, make the column headings
     #echo "<table><tr><th>Book ID</th><th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
     #echo "<table><tr><th>Book ID<select name="sort"><option value='ascending'><option value='descending'></th> <th>Titles</th><th>Year Published</th><th>Shelf ID</th></tr>\n";
-    echo "<table><tr><th><a href='$book_id_d'>Book ID</a><img src='$asc'></th>
-    <th><a href='$title_a'>Titles</a><img src='$asc'></th>
-    <th><a href='$year_published_a'>Year Published</a><img src='$asc'></th>
-    <th><a href='$shelf_id_a'>Shelf ID</a><img src='$asc'></th></tr>\n";
+    echo "<table><tr><th><a href='$book_id_d'>Book ID<img src='$asc'></a></th>
+    <th><a href='$title_a'>Titles<img src='$asc'></a></th>
+    <th><a href='$year_published_a'>Year Published<img src='$asc'></a></th>
+    <th><a href='$shelf_id_a'>Shelf ID<img src='$asc'></a></th></tr>\n";
 
 
         #while loop to run through and print all the data in the books table

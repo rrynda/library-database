@@ -38,10 +38,10 @@ $desc = "https://imp.wiktel.com/media/img/admin/arrow-up.gif";
 if($result = $mysqli->query($query))
 {
     #begin table, make the column headings
-    echo "<table><tr><th><a href='$book_id_a'>Book ID</a><img src='$asc'></th>
-    <th><a href='$title_a'>Titles</a><img src='$asc'></th>
-    <th><a href='$year_published_a'>Year Published</a><img src='$asc'></th>
-    <th><a href='$shelf_id_d'>Shelf ID</a><img src='$asc'></th></tr>\n";
+    echo "<table><tr><th><a href='$book_id_a'>Book ID<img src='$asc'></a></th>
+    <th><a href='$title_a'>Titles<img src='$asc'></a></th>
+    <th><a href='$year_published_a'>Year Published<img src='$asc'></a></th>
+    <th><a href='$shelf_id_d'>Shelf ID<img src='$asc'></a></th></tr>\n";
 
         #while loop to run through and print all the data in the books table
         while($row = $result->fetch_assoc())
