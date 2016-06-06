@@ -66,17 +66,12 @@ if ($result = $mysqli->query($query))
     print_column_header("year_published", "Year Published");
     print_column_header("shelf_id", "Shelf ID");
 
-        # loop over each book row
-        while ($row = $result->fetch_assoc())
-        {
-            #print_r($row);
-            #echo "<h2>Title: </h2>" . $row["title"] . "<br>\n";
-            #printf ("<p>%s\t%s\t%s\t%s</p>\n", $row["id"], $row["title"], $row["year_published"], $row["shelf_id"]);
-
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["title"] . "</td><td>" . $row["year_published"] . "</td><td>" . $row["shelf_id"] . "</td></tr>\n";
-        }
-    #close table
-    echo "</table>"; 
+    # loop over each book row
+    while ($row = $result->fetch_assoc())
+    {
+        echo "<tr><td>" . $row["id"] . "</td><td>" . $row["title"] . "</td><td>" . $row["year_published"] . "</td><td>" . $row["shelf_id"] . "</td></tr>\n";
+    }
+    echo "</table>";
 }
 else
 {
