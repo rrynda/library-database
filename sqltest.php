@@ -47,7 +47,7 @@ if ($result = $mysqli->query($query))
     <th><a href='$shelf_id_a'>Shelf ID<img src='$asc'></a></th></tr>\n";
 
 
-        #while loop to run through and print all the data in the books table
+        # loop over each book row
         while ($row = $result->fetch_assoc())
         {
             #print_r($row);
@@ -61,7 +61,6 @@ if ($result = $mysqli->query($query))
 }
 else
 {
-    #if the database is empty
     echo "The database is empty";
 }
 ?>
