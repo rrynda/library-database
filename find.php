@@ -18,37 +18,21 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <h4><a href='sqltest.php'>Home</a></h4>
 <h4><a href='find.php'>Find a Book</a></h4>
-<!--
+
 <form>
 
-<div class="dropdown">
-    <p>
-        Type of cover:
-        <select name="cover">
-            <option value="hard">Hard cover</option>
-            <option value="soft">Soft cover</option>
-        </select>
-    </p>
-</div>
-<div class="radio">
-    <p>
-        Library location: 
-        <input type="radio" name="location" value="north">North
-        <input type="radio" name="location" value="south">South
-    </p>
-</div>
-<div class="date">
-    <p>
-        <input type="date" name="date">
-    </p>
-</div>
-<div class="checkbox">
-    <p>
-        <input type="checkbox" name="genre" value="classic">Classic<br>
-        <input type="checkbox" name="genre" value="modern">Modern<br>
-    </p>
-</div>
--->
+<p class="heading">Specific search:</p>
+<div class="search">
+<p>
+    To view a book, please enter its ID number:
+    <textarea name="id"></textarea>
+</p>
+
+<input type="submit" value="Search">
+
+</div>       
+</form>
+
 <?php
 #search for and display searched individual books
 #echo"To view a book, please enter its ID number: " . '<textarea name="search"></textarea>' . '<div><input type="submit" value="Search"></div>';
@@ -77,6 +61,40 @@ else
    }
 }
 ?>
+
+<form>
+<p class="heading">Generic search:</p>
+<div class="dropdown">
+    <p>
+        Type of cover:
+        <select name="cover">
+            <option value="hard">Hard cover</option>
+            <option value="soft">Soft cover</option>
+        </select>
+    </p>
+</div>
+<div class="radio">
+    <p>
+        Library location:
+        <input type="radio" name="location" value="north">North
+        <input type="radio" name="location" value="south">South
+    </p>
+</div>
+<div class="date">
+    <p>
+        Today's date:
+        <input type="date" name="date">
+    </p>
+</div>
+<div class="checkbox">
+    <p>
+        Shelf ID:<br>
+        <input type="checkbox" name="shelf" value="1">    1<br>
+        <input type="checkbox" name="shelf" value="2">    2<br>
+    </p>
+</div>
+<input type="submit" value="Search">
+
 </form>
 </body>
 </html>
