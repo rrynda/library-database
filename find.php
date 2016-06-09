@@ -58,6 +58,10 @@ else
             echo "<li>Year Published: " . $row["year_published"] . "</li>\n";
             echo "<li>Shelf ID: " . $row["shelf_id"] . "</li></ul></form>\n";
         }
+        else
+        {
+            echo "Book not in database.";
+        }
    }
 }
 ?>
