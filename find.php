@@ -84,12 +84,6 @@ else
         <input type="radio" name="location" value="south">South
     </p>
 </div>
-<div class="date">
-    <p>
-        Today's date:
-        <input type="date" name="date">
-    </p>
-</div>
 <div class="checkbox">
     <p>
         Shelf ID:<br>
