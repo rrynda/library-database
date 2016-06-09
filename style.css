@@ -16,20 +16,35 @@ th
     border-bottom: 1px solid black;
 }
 
-textarea
+form
+{
+    display: table;
+    margin: 5px;
+}
+
+form textarea
 {
     height: 12px;
     width: 60px;
     vertical-align: middle;
 }
 
-form ul
+p.heading
 {
-    
+    font-weight: bold;
 }
 
-form radio
+div.dropdown
 {
-    
+     
 }
 
+div.date
+{
+    text-align: middle;
+}
+
+div.checkbox
+{
+    padding-left: 15px;
+}

@@ -28,7 +28,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     <textarea name="id"></textarea>
 </p>
 
-<input type="submit" value="Search">
+<input type="submit" value="Find">
 
 </div>       
 </form>
