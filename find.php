@@ -37,7 +37,6 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 #search for and display searched individual books
 #echo"To view a book, please enter its ID number: " . '<textarea name="search"></textarea>' . '<div><input type="submit" value="Search"></div>';
 
-$sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
 if(!array_key_exists("id", $_REQUEST))
 {
     echo "Book ID not entered. Please try again.";
