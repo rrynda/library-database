@@ -16,7 +16,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <body>
 <h2>Welcome to the Library</h2>
 
-<h4><a href='http://rrynda.wiktel.com/sqltest.php'>Home</a></h4>
+<h4><a href='sqltest.php'>Home</a></h4>
+<h4><a href='find.php'>Find a Book</a></h4>
 
 <?php
 
