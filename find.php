@@ -39,7 +39,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 if(!array_key_exists("id", $_REQUEST))
 {
-    echo "Book ID not entered. Please try again.";
+    echo "Book ID not entered.";
 }
 else 
 {
@@ -64,7 +64,7 @@ else
    }
 }
 ?>
-
+<!--
 <form>
 <p class="heading">Generic search:</p>
 <div class="dropdown">
@@ -93,5 +93,6 @@ else
 <input type="submit" value="Search">
 
 </form>
+-->
 </body>
 </html>
