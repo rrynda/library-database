@@ -16,7 +16,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <body>
 <h2>Find a Book</h2>
 
-<h4><a href='sqltest.php'>Home</a></h4>
+<h4><a href='index.php'>Home</a></h4>
 <h4><a href='find.php'>Find a Book</a></h4>
 
 <form>
