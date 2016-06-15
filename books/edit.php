@@ -12,7 +12,6 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <title>Edit Book Entry</title>
 
 </head>
-
 <body>
 <h2>Edit Book Entry</h2>
 
@@ -33,43 +32,72 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 </form>
 
 <?php
-if(!array_key_exists("id", $_REQUEST))
+if (array_key_exists("id", $_POST))
 {
-    echo "Book ID not entered.";
-}
-else
-{
-    $id = $_REQUEST["id"];
-    $query1 = "SELECT * FROM books WHERE id = '" . $mysqli->real_escape_string($id) . "'";
-    #print $query;
+    $id = $_POST["id"];
+      //print_r ($id);
+    $title = $_POST["title"];
+      //print_r ($title);
+    $year_published = $_POST["year_published"];
+      //print_r ($year_published);
+    $shelf_id = $_POST["shelf_id"];
+      //print_r ($shelf_id);
 
-    if ($result = $mysqli->query($query1))
-    {
-        if ($row = $result->fetch_assoc())
-        {
+    $query2 = "UPDATE books SET title = '" . $mysqli->real_escape_string($title) . "',
+        year_published = '" . $mysqli->real_escape_string($year_published) . "',
+        shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'
+        WHERE id = '" . $mysqli->real_escape_string($id) . "'";
+      print_r ($query2);
+    $mysqli->query($query2);
 ?>
-<div class="edit">
+
 <p>
-    Book ID: <?= $row["id"] ?><br>
-    Title: <input type="text" value="<?php echo$row["title"] ?>"><br>
-    Year Published: <input type="text" value="<?= $row["year_published"] ?>"><br>
-    Shelf ID: <input type="text" value="<?= $row["shelf_id"] ?>"><br>
-    <a href=""><input type="submit" value="Save"></a>
+    Your edit was made successfully.
 </p>
-</div>
 
 <?php
-        }
-        else
+}else
+{
+    if(!array_key_exists("id", $_REQUEST))
+    {
+        echo "Book ID not entered.";
+    }
+    else
+    {
+        $id = $_REQUEST["id"];
+        $query1 = "SELECT * FROM books WHERE id = '" . $mysqli->real_escape_string($id) . "'";
+        #print $query;
+
+        if ($result = $mysqli->query($query1))
         {
-            echo "Book not in database.";
+            if ($row = $result->fetch_assoc())
+            {
+    ?>
+    <form method="post">
+    <div class="edit">
+    <p>
+    
+        Book ID: <?= $row["id"] ?><br>
+        Title: <input  name="title" type="text" value="<?php echo$row["title"] ?>"><br>
+        Year Published: <input name="year_published" type="text" value="<?= $row["year_published"] ?>"><br>
+        Shelf ID: <input name="shelf_id" type="text" value="<?= $row["shelf_id"] ?>"><br>
+        <a href=""><input type="submit" value="Save"></a>
+
+        <input type="hidden" name="id" value="<?= $id ?>">
+    </p>
+    </div>
+    </form>
+
+    <?php
+            }
+            else
+            {
+                echo "Book not in database.";
+            }
         }
     }
 }
-//accept id from find.php
-//display options of updateable columns
-    //select what column to update
-    //execute update query if new data is acceptable
 
-$query = "UPDATE books SET WHERE";
-
+?>
+</body>
+</html>
