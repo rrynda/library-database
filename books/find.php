@@ -65,10 +65,8 @@ else
 
 ?>
 
-<form>
 <p>
-    <a href='edit.php'><input type="submit" value="Edit"></a>
+    <a href='edit.php'><input type="submit" value="Edit/Add a Book"></a>
 </p>
-</form>
 </body>
 </html>
