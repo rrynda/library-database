@@ -43,29 +43,34 @@ if (array_key_exists("id", $_POST))
     $shelf_id = $_POST["shelf_id"];
       //print_r ($shelf_id);
 
-    print_r ($id);
+    //print_r ($id);
     if ($id != "") //if id != empty
     {
         $query2 = "UPDATE books SET title = '" . $mysqli->real_escape_string($title) . "',
             year_published = '" . $mysqli->real_escape_string($year_published) . "',
             shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'
             WHERE id = '" . $mysqli->real_escape_string($id) . "'";
-        print_r ($query2);
-        $mysqli->query($query2);
+        //print_r ($query2);
+        //$mysqli->query($query2);
         
         //CLEAN UP STUFF IN GENERAL
         //if query succeeded
+        if ($mysqli->query($query2))
+        {
             ?>
-            <p>
+            <p class ="succeed">
                 Your edit was made successfully.
             </p>
             <?php
-        //else
+        }
+        else
+        {
             ?>
             <p class="error">
                 Your edit was  not made successfully.
             </p>
             <?php
+        }
     }
     else //id id = empty
     {
@@ -73,21 +78,26 @@ if (array_key_exists("id", $_POST))
             "VALUES ( '" . $mysqli->real_escape_string($title) . "'," .
             "'" . $mysqli->real_escape_string($year_published) . "', " .
             "'" . $mysqli->real_escape_string($shelf_id) . "')";
-        print_r ($query3);
-        $mysqli->query($query3);
+        //print_r ($query3);
+        //$mysqli->query($query3);
         
         //if query succeeded
+        if ($mysqli->query($query3))
+        {
             ?>
-            <p>
+            <p class ="succeed">
                 Book was added successfully.
             </p>
             <?php
-        //else
+        }
+        else
+        {
             ?>
             <p class="error">
                 Your addition was  not made successfully.
             </p>
             <?php
+        }
     }
 ?>
 

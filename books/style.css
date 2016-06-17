@@ -49,6 +49,11 @@ div.checkbox
     padding-left: 15px;
 }
 
+p.succeed
+{
+    color: green;
+}
+
 p.error{
     color: red;
 }
