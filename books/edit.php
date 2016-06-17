@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <?php
+header('Content-Type: text/html; charset=UTF-8');
+
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-?>
-
+?><!DOCTYPE html>
 <html>
 <head>
 
