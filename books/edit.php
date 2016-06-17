@@ -6,11 +6,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?><!DOCTYPE html>
 <html>
 <head>
-
-<link href="style.css" type="text/css" rel="stylesheet">
-
-<title>Edit Book Entry</title>
-
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Edit Book Entry</title>
 </head>
 <body>
 <h2>Edit Book Entry</h2>
@@ -25,9 +22,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     To edit a book, please enter its ID number:
     <textarea name="id"></textarea>
 </p>
-
 <input type="submit" value="Edit">
-
 </div>
 </form>
 
@@ -35,91 +30,60 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if (array_key_exists("id", $_POST))
 {
     $id = $_POST["id"];
-      //print_r ($id);
     $title = $_POST["title"];
-      //print_r ($title);
     $year_published = $_POST["year_published"];
-      //print_r ($year_published);
     $shelf_id = $_POST["shelf_id"];
-      //print_r ($shelf_id);
 
-    //print_r ($id);
-    if ($id != "") //if id != empty
+    if ($id != "")
     {
-        $query2 = "UPDATE books SET title = '" . $mysqli->real_escape_string($title) . "',
+        $query = "UPDATE books SET title = '" . $mysqli->real_escape_string($title) . "',
             year_published = '" . $mysqli->real_escape_string($year_published) . "',
             shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'
             WHERE id = '" . $mysqli->real_escape_string($id) . "'";
-        //print_r ($query2);
-        //$mysqli->query($query2);
-        
-        //if query succeeded
-        if ($mysqli->query($query2)) //runs query as well as checks that it executes
-        {
-            ?>
-            <p class ="succeed">
-                Your edit was made successfully.
-            </p>
-            <?php
-        }
-        else
-        {
-            ?>
-            <p class="error">
-                Your edit was  not made successfully.
-            </p>
-            <?php
-        }
     }
-    else //id id = empty
+    else
     {
-        $query3 = "INSERT INTO books (title, year_published, shelf_id)" . 
+        $query = "INSERT INTO books (title, year_published, shelf_id)" .
             "VALUES ( '" . $mysqli->real_escape_string($title) . "'," .
             "'" . $mysqli->real_escape_string($year_published) . "', " .
             "'" . $mysqli->real_escape_string($shelf_id) . "')";
-        //print_r ($query3);
-        //$mysqli->query($query3);
-        
-        //if query succeeded
-        if ($mysqli->query($query3)) //runs query as well as checks that it executes
-        {
-            ?>
-            <p class ="succeed">
-                Book was added successfully.
-            </p>
-            <?php
-        }
-        else
-        {
-            ?>
-            <p class="error">
-                Your addition was  not made successfully.
-            </p>
-            <?php
-        }
+    }
+
+    if ($mysqli->query($query))
+    {
+        ?>
+        <p class="succeed">
+            "<?= $title ?>" was saved successfully.
+        </p>
+        <?php
+    }
+    else
+    {
+        ?>
+        <p class="error">
+            Failed to save "<?= $title ?>".
+        </p>
+        <?php
     }
 }
 else
 {
+    # No form was submitted.
+
     if (!array_key_exists("id", $_REQUEST))
     {
-        echo "Book ID not entered.";
-        
-        //display empty form to add book
-        $id = null;
-        //$title = "Larry";
-        $title = null;
-        $year_published = null;
-        $shelf_id = null;
+        $id = "";
+        $title = "";
+        $year_published = "";
+        $shelf_id = "";
         form($id, $title, $year_published, $shelf_id);
     }
     else
     {
         $id = $_REQUEST["id"];
-        $query1 = "SELECT * FROM books WHERE id = '" . $mysqli->real_escape_string($id) . "'";
-        print_r ($query1);
+        $query = "SELECT * FROM books WHERE id = '" . $mysqli->real_escape_string($id) . "'";
 
-        if ($result = $mysqli->query($query1))
+        if ($result = $mysqli->query($query))
         {
             if ($row = $result->fetch_assoc())
             {
@@ -127,14 +91,17 @@ else
                 $title = $row["title"];
                 $year_published = $row["year_published"];
                 $shelf_id = $row["shelf_id"];
-                
-                //display filled form to edit book
+
                 form($id, $title, $year_published, $shelf_id);
             }
             else
             {
                 echo "Book not in database.";
             }
+        }
+        else
+        {
+            echo "Database query failed.";
         }
     }
 }
@@ -145,21 +112,15 @@ function form($id, $title, $year_published, $shelf_id)
     <form method="post">
     <div class="edit">
     <p>
-    
-        Book ID: <?php echo $id ?><br>
-        Title: <input  name="title" type="text" value="<?= htmlspecialchars($title) ?>"><br>
-        Year Published: <input name="year_published" type="text" value="<?= htmlspecialchars($year_published) ?>"><br>
-        Shelf ID: <input name="shelf_id" type="text" value="<?= htmlspecialchars($shelf_id) ?>"><br>
-        
-            <a href=""><input type="submit" value="<?= $id ? 'Save':'Add'?>"></a>
-
-            <!-- <input type="hidden" name="id" value="<? // = $id ?>"> -->
-            <input type="hidden" name="id" value="<?= $id ?>">
+        Book ID: <?php echo $id ?><input type="hidden" name="id" value="<?= $id ?>"><br>
+        <label for="title">Title</label>: <input id="title" name="title" type="text" value="<?= htmlspecialchars($title) ?>"><br>
+        <label for="year_published">Year Published</label>: <input id="year_published" name="year_published" type="text" value="<?= htmlspecialchars($year_published) ?>"><br>
+        <label for="shelf_id">Shelf ID</label>: <input id="shelf_id" name="shelf_id" type="text" value="<?= htmlspecialchars($shelf_id) ?>"><br>
+        <input type="submit" value="<?= $id ? 'Save' : 'Add' ?>">
     </p>
     </div>
     </form>
     <?php
-    return "title, year_published, shelf_id"; //return data so query3 can do its thing
 }
 ?>
 </body>
