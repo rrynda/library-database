@@ -16,8 +16,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <body>
 <h2>View Books</h2>
 
-<h4><a href='../index.php'>Home</a></h4>
-<h4><a href='index.php'>View Books</a></h4>
+<h4><a href='../'>Home</a></h4>
+<h4><a href='./'>View Books</a></h4>
 <h4><a href='find.php'>Find a Book</a></h4>
 
 <?php
