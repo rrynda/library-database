@@ -53,9 +53,8 @@ if (array_key_exists("id", $_POST))
         //print_r ($query2);
         //$mysqli->query($query2);
         
-        //CLEAN UP STUFF IN GENERAL
         //if query succeeded
-        if ($mysqli->query($query2))
+        if ($mysqli->query($query2)) //runs query as well as checks that it executes
         {
             ?>
             <p class ="succeed">
@@ -82,7 +81,7 @@ if (array_key_exists("id", $_POST))
         //$mysqli->query($query3);
         
         //if query succeeded
-        if ($mysqli->query($query3))
+        if ($mysqli->query($query3)) //runs query as well as checks that it executes
         {
             ?>
             <p class ="succeed">
@@ -99,10 +98,6 @@ if (array_key_exists("id", $_POST))
             <?php
         }
     }
-?>
-
-
-<?php
 }
 else
 {
@@ -144,7 +139,6 @@ else
     }
 }
 
-
 function form($id, $title, $year_published, $shelf_id)
 {
     ?>
@@ -161,7 +155,6 @@ function form($id, $title, $year_published, $shelf_id)
 
             <!-- <input type="hidden" name="id" value="<? // = $id ?>"> -->
             <input type="hidden" name="id" value="<?= $id ?>">
-        
     </p>
     </div>
     </form>
