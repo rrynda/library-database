@@ -61,6 +61,11 @@ if (array_key_exists("id", $_POST))
             </p>
             <?php
         //else
+            ?>
+            <p class="error">
+                Your edit was  not made successfully.
+            </p>
+            <?php
     }
     else //id id = empty
     {
@@ -78,6 +83,11 @@ if (array_key_exists("id", $_POST))
             </p>
             <?php
         //else
+            ?>
+            <p class="error">
+                Your addition was  not made successfully.
+            </p>
+            <?php
     }
 ?>
 
