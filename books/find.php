@@ -68,5 +68,10 @@ else
 <p>
     <a href='edit.php'><input type="submit" value="Edit/Add a Book"></a>
 </p>
+
+<p>
+    <a href='delete.php'><input type="submit" value="Delete a Book"></a>
+</p>
+
 </body>
 </html>
