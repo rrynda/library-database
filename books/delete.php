@@ -18,7 +18,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View Books</a></h4>
-<h4><a href='find.php'>Find a Book</a></h4>
+<!-- <h4><a href='find.php'>Find a Book</a></h4> -->
 
 <form>
 
