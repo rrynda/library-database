@@ -35,13 +35,13 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 -->
 <?php
 #search for and display book to be deleted
-
+/*
 if(!array_key_exists("id", $_REQUEST))
 {
     echo "Book ID not entered.";
 }
-else 
-{
+else
+{ */
     $id = $_REQUEST["id"];
     $query1 = "SELECT * FROM books WHERE id = '" . $mysqli->real_escape_string($id) . "'";
 
@@ -98,12 +98,12 @@ else
                 }
             }
         }
-        else
+        /* else
         {
             echo "Book not in database.";
-        }
+        } */
     }
-}
+//}
 
 ?>
 
