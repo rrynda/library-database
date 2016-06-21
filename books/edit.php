@@ -65,11 +65,6 @@ if (array_key_exists("id", $_POST))
         </p>
         <?php
     }
-    ?>
-    <p>
-        <a href='delete.php'><input type="submit" value="Delete Book"></a>
-    </p>
-    <?php
 }
 else
 {
@@ -98,6 +93,11 @@ else
                 $shelf_id = $row["shelf_id"];
 
                 form($id, $title, $year_published, $shelf_id);
+                ?>
+                <p>
+                    <a href='delete.php'><input type="submit" value="Delete Book"></a>
+                </p>
+                <?php
             }
             else
             {
