@@ -79,7 +79,7 @@ if ($result = $mysqli->query($query))
     
     ?>
     <p>
-    <a href='edit.php'><input type="submit" value="Edit/Add a Book"></a>
+    <a href='edit.php'><input type="submit" value="Add a Book"></a>
     </p>
     <?php
 }
