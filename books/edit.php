@@ -14,7 +14,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View Books</a></h4>
-<!-- <h4><a href='find.php'>Find a Book</a></h4> -->
+<!-- <h4><a href='find.php'>Find a Book</a></h4>
 
 <form>
 <div class="search">
@@ -25,7 +25,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <input type="submit" value="Edit">
 </div>
 </form>
-
+-->
 <?php
 if (array_key_exists("id", $_POST))
 {
