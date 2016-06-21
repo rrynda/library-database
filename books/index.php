@@ -76,7 +76,6 @@ if ($result = $mysqli->query($query))
         echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
     }
     echo "</table>";
-    
     ?>
     <p>
     <a href='edit.php'><input type="submit" value="Add a Book"></a>
