@@ -93,11 +93,9 @@ else
                 $shelf_id = $row["shelf_id"];
 
                 form($id, $title, $year_published, $shelf_id);
-                ?>
-                <p>
-                    <a href='delete.php'><input type="submit" value="Delete Book"></a>
-                </p>
-                <?php
+                echo "<p>";
+                    echo "<a href='delete.php?id=$id'><input type='submit' value='Delete Book'></a>";
+                echo "</p>";
             }
             else
             {
