@@ -114,7 +114,7 @@ else
     $shelf_id = $_REQUEST['search'];
     $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
         "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
-        "OR year_published = '" . $mysqli->real_escape_string($shelf_id) . "'";
+        "OR shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'";
 
     print_table($mysqli, $query2);
     echo "Search parameters entered.";
