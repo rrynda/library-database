@@ -48,34 +48,11 @@ function print_column_header($name, $description)
     echo "</a></th>";
 }
 
-function print_table($mysqli)
+function print_table($mysqli, $query)
 {
     global $sort;
     global $dir;
-}
-
-if(!array_key_exists("search", $_REQUEST))
-{
-    //print_table($mysqli);
-    $sort = "id";
-    $dir = 1;
-    $sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
-    if (array_key_exists("sort", $_REQUEST) &&
-        array_search($_REQUEST["sort"], $sortable_columns))
-    {
-        $sort = $_REQUEST["sort"];
-    }
-    if (array_key_exists("dir", $_REQUEST) &&
-        $_REQUEST["dir"] == "0")
-    {
-        $dir = 0;
-    }
-
-    $query = "SELECT * FROM books ORDER BY $sort";
-    if ($dir == 0)
-    {
-        $query .= " DESC";
-    }
+    
     if ($result = $mysqli->query($query))
     {
         echo "<table><tr>";
@@ -102,6 +79,31 @@ if(!array_key_exists("search", $_REQUEST))
     {
         echo "Query failed:" . $mysqli->error();
     }
+}
+
+if(!array_key_exists("search", $_REQUEST))
+{
+    $sort = "id";
+    $dir = 1;
+    $sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
+    if (array_key_exists("sort", $_REQUEST) &&
+        array_search($_REQUEST["sort"], $sortable_columns))
+    {
+        $sort = $_REQUEST["sort"];
+    }
+    if (array_key_exists("dir", $_REQUEST) &&
+        $_REQUEST["dir"] == "0")
+    {
+        $dir = 0;
+    }
+
+    $query = "SELECT * FROM books ORDER BY $sort";
+    if ($dir == 0)
+    {
+        $query .= " DESC";
+    }
+    
+    print_table($mysqli, $query);
 
     echo "No search parameters entered.";
 }
@@ -114,27 +116,7 @@ else
         "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
         "OR year_published = '" . $mysqli->real_escape_string($shelf_id) . "'";
 
-    if ($result = $mysqli->query($query2))
-    {
-        echo "<table><tr>";
-        print_column_header("id", "Book ID");
-        print_column_header("title", "Title");
-        print_column_header("year_published", "Year Published");
-        print_column_header("shelf_id", "Shelf ID");
-
-        # loop over each book row
-        while ($row = $result->fetch_assoc())
-        {
-            $id = $row["id"];
-            //echo "<tr><td><a href='find.php?id=$id'>" . $row["id"] . "</a></td><td><a href='find.php?id=$id'>" . $row["title"] . "</a></td><td><a href='find.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='find.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-            echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-        }
-        echo "</table>";
-    }
-    else
-    {
-        echo "Query failed:" . $mysqli->error();
-    }
+    print_table($mysqli, $query2);
     echo "Search parameters entered.";
 }
 ?>
