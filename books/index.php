@@ -114,11 +114,19 @@ else
     $shelf_id = $_REQUEST['search'];
 
     //query for an exact match
-    $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
+/*    $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
         "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
         "OR shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'";
 
     print_table($mysqli, $query2);
+*/
+    //query for LIKE
+    $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'" .
+        "OR year_published LIKE '%" . $mysqli->real_escape_string($year_published) . "%'" .
+        "OR shelf_id LIKE '%" . $mysqli->real_escape_string($shelf_id) . "%'";
+
+    print_table($mysqli, $query3);
+    
     //echo "Search parameters entered.";
 }
 ?>
