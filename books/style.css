@@ -22,10 +22,18 @@ form
     margin: 5px;
 }
 
+/*
 form textarea
 {
     height: 12px;
     width: 60px;
+    vertical-align: middle;
+}
+*/
+form textarea
+{
+    height: 15px;
+    width: 385px;
     vertical-align: middle;
 }
 
