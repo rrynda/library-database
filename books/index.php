@@ -105,19 +105,21 @@ if(!array_key_exists("search", $_REQUEST))
     
     print_table($mysqli, $query);
 
-    echo "No search parameters entered.";
+    //echo "No search parameters entered.";
 }
 else
 {
     $title = $_REQUEST['search'];
     $year_published = $_REQUEST['search'];
     $shelf_id = $_REQUEST['search'];
+
+    //query for an exact match
     $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
         "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
         "OR shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'";
 
     print_table($mysqli, $query2);
-    echo "Search parameters entered.";
+    //echo "Search parameters entered.";
 }
 ?>
 </body>
