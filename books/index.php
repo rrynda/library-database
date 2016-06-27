@@ -138,7 +138,7 @@ else
 //query for LIKE and substrings
     $input = ($_REQUEST['search']);
     //echo $input;
-    $length = str_word_count($input);
+    $length = str_word_count($input, 0, '0123456789,:'); //characters between '' designate characters to be counted as words.
     //echo $length;
 
     if ($length == 1)
@@ -171,8 +171,8 @@ else
             $word = $pieces[$index];
 
             $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
-                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
-                "OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
+                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate tto shelf_id line below
+                //"OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
             //echo $temp;
 
             if ($counter == 1)
