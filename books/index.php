@@ -139,6 +139,7 @@ else
     $input = ($_REQUEST['search']);
     //echo $input;
     $length = str_word_count($input, 0, '0123456789,:'); //characters between '' designate characters to be counted as words.
+        //str_word_count could also be used to turn the string into an array and store each word in an index by replacing 0 with 1
     //echo $length;
 
     if ($length == 1)
@@ -152,6 +153,7 @@ else
     else
     {
         $pieces = explode(" ", $input);
+        //$pieces = str_word_count($input, 1, '0123456789,:');
         $counter = $length;
         $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
 
