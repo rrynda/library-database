@@ -104,7 +104,7 @@ if(!array_key_exists("search", $_REQUEST))
     {
         $query .= " DESC";
     }
-    
+
     print_table($mysqli, $query);
 }
 else
@@ -159,8 +159,7 @@ else
         {
             //$word[$counter] = strtok($input, " ");
             //echo $word[$counter];
-        }
-*/
+        } */
 
         $pieces = explode(" ", $input);
         $counter = $length;
@@ -171,7 +170,7 @@ else
             $word = $pieces[$index];
 
             $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
-                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate tto shelf_id line below
+                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate to shelf_id line below
                 //"OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
             //echo $temp;
 
@@ -185,7 +184,6 @@ else
                 $counter--;
             }
         }
-        
         echo $query5;
         print_table($mysqli, $query5);
     }
