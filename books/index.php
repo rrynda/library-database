@@ -152,8 +152,8 @@ else
     }
     else
     {
-        $pieces = explode(" ", $input);
-        //$pieces = str_word_count($input, 1, '0123456789,:');
+        //$pieces = explode(" ", $input);
+        $pieces = str_word_count($input, 1, '0123456789,:');
         $counter = $length;
         $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
 
