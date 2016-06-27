@@ -21,9 +21,9 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <!-- <h4><a href='find.php'>Find a Book</a></h4> -->
 
 <form>
-<div class="">
+<div class="search_box">
     <input type="submit" value="Search">
-    <textarea name="search"></textarea>
+    <input type="text" name="search" maxlength="100">
 </div>
 </form>
 
