@@ -77,7 +77,7 @@ function print_table($mysqli, $query)
     }
     else
     {
-        echo "Query failed:" . $mysqli->error();
+        echo "Query failed:" . $mysqli->error;
     }
 }
 
