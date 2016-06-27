@@ -109,29 +109,85 @@ if(!array_key_exists("search", $_REQUEST))
 }
 else
 {
-    $title = $_REQUEST['search'];
+/*    $title = $_REQUEST['search'];
     $year_published = $_REQUEST['search'];
     $shelf_id = $_REQUEST['search'];
-
-    //query for an exact match
+*/
+//query for an exact match
 /*    $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
         "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
         "OR shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'";
 
     print_table($mysqli, $query2);
 */
-    //query for LIKE
+//query for LIKE
 /*    $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'" .
         "OR year_published LIKE '%" . $mysqli->real_escape_string($year_published) . "%'" .
         "OR shelf_id LIKE '%" . $mysqli->real_escape_string($shelf_id) . "%'";
 
     print_table($mysqli, $query3);
 */
-    //query for LIKE only looking at title
-    $query4 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'";
+//query for LIKE only looking at title
+/*    $query4 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'";
 
     print_table($mysqli, $query4);
-    
+*/
+
+//query for LIKE and substrings
+    $input = ($_REQUEST['search']);
+    //echo $input;
+    $length = str_word_count($input);
+    //echo $length;
+
+    if ($length == 1) //loop if there are spaces till in the steing
+    {
+        $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
+            "OR year_published LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
+            "OR shelf_id LIKE '%" . $mysqli->real_escape_string($input) . "%'";
+        echo $query3;
+        print_table($mysqli, $query3);
+    }
+    else
+    {
+/*        $cut_at = strpos($input, " ");
+        echo $cut_at;
+        chunk_split($str, $cut_at);
+*/
+/*        for ($counter = 1; $counter <= $length; $counter++)
+        {
+            //$word[$counter] = strtok($input, " ");
+            //echo $word[$counter];
+        }
+*/
+
+        $pieces = explode(" ", $input);
+        $counter = $length;
+        $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
+
+        for ($index = 0; $index < $length; $index++)
+        {
+            $word = $pieces[$index];
+
+            $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
+                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
+                "OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
+            //echo $temp;
+
+            if ($counter == 1)
+            {
+                $query5 = $query5 . $temp; //end query
+            }
+            else
+            {
+                $query5 = $query5 . $temp . " AND ";//AND
+                $counter--;
+            }
+        }
+        
+        echo $query5;
+        print_table($mysqli, $query5);
+    }
+
     //echo "Search parameters entered.";
 }
 ?>
