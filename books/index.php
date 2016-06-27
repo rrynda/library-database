@@ -146,21 +146,11 @@ else
         $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
             "OR year_published LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
             "OR shelf_id LIKE '%" . $mysqli->real_escape_string($input) . "%'";
-        echo $query3;
+        //echo $query3;
         print_table($mysqli, $query3);
     }
     else
     {
-/*        $cut_at = strpos($input, " ");
-        echo $cut_at;
-        chunk_split($str, $cut_at);
-*/
-/*        for ($counter = 1; $counter <= $length; $counter++)
-        {
-            //$word[$counter] = strtok($input, " ");
-            //echo $word[$counter];
-        } */
-
         $pieces = explode(" ", $input);
         $counter = $length;
         $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
@@ -184,7 +174,7 @@ else
                 $counter--;
             }
         }
-        echo $query5;
+        //echo $query5;
         print_table($mysqli, $query5);
     }
 }
