@@ -83,6 +83,8 @@ function print_table($mysqli, $query)
 
 if(!array_key_exists("search", $_REQUEST))
 {
+    //echo "No search parameters entered.";
+    
     $sort = "id";
     $dir = 1;
     $sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
@@ -104,11 +106,11 @@ if(!array_key_exists("search", $_REQUEST))
     }
     
     print_table($mysqli, $query);
-
-    //echo "No search parameters entered.";
 }
 else
 {
+    //echo "Search parameters entered.";
+
 /*    $title = $_REQUEST['search'];
     $year_published = $_REQUEST['search'];
     $shelf_id = $_REQUEST['search'];
@@ -139,7 +141,7 @@ else
     $length = str_word_count($input);
     //echo $length;
 
-    if ($length == 1) //loop if there are spaces till in the steing
+    if ($length == 1)
     {
         $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
             "OR year_published LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
@@ -179,7 +181,7 @@ else
             }
             else
             {
-                $query5 = $query5 . $temp . " AND ";//AND
+                $query5 = $query5 . $temp . " AND ";//add to query with AND
                 $counter--;
             }
         }
@@ -187,8 +189,6 @@ else
         echo $query5;
         print_table($mysqli, $query5);
     }
-
-    //echo "Search parameters entered.";
 }
 ?>
 </body>
