@@ -109,67 +109,6 @@ if(!array_key_exists("search", $_REQUEST))
 }
 else
 {
-    //echo "Search parameters entered.";
-
-/*    $title = $_REQUEST['search'];
-    $year_published = $_REQUEST['search'];
-    $shelf_id = $_REQUEST['search'];
-*/
-//query for an exact match
-/*    $query2 = "SELECT * FROM books WHERE title = '" . $mysqli->real_escape_string($title) . "'" .
-        "OR year_published = '" . $mysqli->real_escape_string($year_published) . "'" .
-        "OR shelf_id = '" . $mysqli->real_escape_string($shelf_id) . "'";
-
-    print_table($mysqli, $query2);
-*/
-//query for LIKE
-/*    $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'" .
-        "OR year_published LIKE '%" . $mysqli->real_escape_string($year_published) . "%'" .
-        "OR shelf_id LIKE '%" . $mysqli->real_escape_string($shelf_id) . "%'";
-
-    print_table($mysqli, $query3);
-*/
-//query for LIKE only looking at title
-/*    $query4 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($title) . "%'";
-
-    print_table($mysqli, $query4);
-*/
-
-//query for LIKE and substrings
-/*    $input = ($_REQUEST['search']);
-    //echo $input;
-    $length = str_word_count($input, 0, '0123456789,:'); //characters between '' designate characters to be counted as words.
-        //str_word_count could also be used to turn the string into an array and store each word in an index by replacing 0 with 1
-    //echo $length;
-
-    //$pieces = explode(" ", $input);
-    $pieces = str_word_count($input, 1, '0123456789,:');
-    $counter = $length;
-    $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
-
-    for ($index = 0; $index < $length; $index++)
-    {
-        $word = $pieces[$index];
-
-        $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
-            "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate to shelf_id line below
-            //"OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
-        //echo $temp;
-
-        if ($counter == 1)
-        {
-            $query5 = $query5 . $temp; //end query
-        }
-        else
-        {
-            $query5 = $query5 . $temp . " AND ";//add to query with AND
-            $counter--;
-        }
-    }
-    //echo $query5;
-    print_table($mysqli, $query5);
-    */
-
 //query for LIKE and substrings
     $input = ($_REQUEST['search']);
     $pieces = explode(" ", $input);
