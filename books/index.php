@@ -136,7 +136,7 @@ else
 */
 
 //query for LIKE and substrings
-    $input = ($_REQUEST['search']);
+/*    $input = ($_REQUEST['search']);
     //echo $input;
     $length = str_word_count($input, 0, '0123456789,:'); //characters between '' designate characters to be counted as words.
         //str_word_count could also be used to turn the string into an array and store each word in an index by replacing 0 with 1
@@ -168,6 +168,26 @@ else
     }
     //echo $query5;
     print_table($mysqli, $query5);
+    */
+
+//query for LIKE and substrings
+    $input = ($_REQUEST['search']);
+    $pieces = explode(" ", $input);
+    $query = "";
+
+    foreach($pieces as $piece)
+    {
+        if ($query != "")
+        {
+            $query = "AND";
+        }
+        $query = "title LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
+            "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
+    }
+    $query = "SELECT * FROM books WHERE " . $query;
+
+    //echo $query5;
+    print_table($mysqli, $query);
 }
 ?>
 </body>
