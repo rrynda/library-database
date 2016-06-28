@@ -142,43 +142,32 @@ else
         //str_word_count could also be used to turn the string into an array and store each word in an index by replacing 0 with 1
     //echo $length;
 
-    if ($length == 1)
-    {
-        $query3 = "SELECT * FROM books WHERE title LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
-            "OR year_published LIKE '%" . $mysqli->real_escape_string($input) . "%'" .
-            "OR shelf_id LIKE '%" . $mysqli->real_escape_string($input) . "%'";
-        //echo $query3;
-        print_table($mysqli, $query3);
-    }
-    else
-    {
-        //$pieces = explode(" ", $input);
-        $pieces = str_word_count($input, 1, '0123456789,:');
-        $counter = $length;
-        $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
+    //$pieces = explode(" ", $input);
+    $pieces = str_word_count($input, 1, '0123456789,:');
+    $counter = $length;
+    $query5 = "SELECT * FROM books WHERE "; //array[all the search terms stored in varables];
 
-        for ($index = 0; $index < $length; $index++)
+    for ($index = 0; $index < $length; $index++)
+    {
+        $word = $pieces[$index];
+
+        $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
+            "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate to shelf_id line below
+            //"OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
+        //echo $temp;
+
+        if ($counter == 1)
         {
-            $word = $pieces[$index];
-
-            $temp = "(title LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%'" .
-                "OR year_published LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')"; //add . to concatenate to shelf_id line below
-                //"OR shelf_id LIKE '%" . $mysqli->real_escape_string($pieces[$index]) . "%')";
-            //echo $temp;
-
-            if ($counter == 1)
-            {
-                $query5 = $query5 . $temp; //end query
-            }
-            else
-            {
-                $query5 = $query5 . $temp . " AND ";//add to query with AND
-                $counter--;
-            }
+            $query5 = $query5 . $temp; //end query
         }
-        //echo $query5;
-        print_table($mysqli, $query5);
+        else
+        {
+            $query5 = $query5 . $temp . " AND ";//add to query with AND
+            $counter--;
+        }
     }
+    //echo $query5;
+    print_table($mysqli, $query5);
 }
 ?>
 </body>
