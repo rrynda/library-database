@@ -6,11 +6,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <html>
 <head>
-
 <link href="style.css" type="text/css" rel="stylesheet">
-
 <title>View Books</title>
-
 </head>
 
 <body>
@@ -60,13 +57,16 @@ function print_table($mysqli, $query)
         print_column_header("title", "Title");
         print_column_header("year_published", "Year Published");
         print_column_header("shelf_id", "Shelf ID");
+        print_column_header("f_name", "Patron First Name");
+        print_column_header("l_name", "Patron Last Name");
 
         # loop over each book row
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
             //echo "<tr><td><a href='find.php?id=$id'>" . $row["id"] . "</a></td><td><a href='find.php?id=$id'>" . $row["title"] . "</a></td><td><a href='find.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='find.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-            echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
+            //echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
+            echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["l_name"] . "</a></td></tr>\n";
         }
         echo "</table>";
         ?>
@@ -83,8 +83,6 @@ function print_table($mysqli, $query)
 
 if(!array_key_exists("search", $_REQUEST))
 {
-    //echo "No search parameters entered.";
-    
     $sort = "id";
     $dir = 1;
     $sortable_columns = array('id', 'title', 'year_published', 'shelf_id');
@@ -99,7 +97,12 @@ if(!array_key_exists("search", $_REQUEST))
         $dir = 0;
     }
 
-    $query = "SELECT * FROM books ORDER BY $sort";
+    //$query = "SELECT * FROM books ORDER BY $sort";
+    $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, patrons.f_name, patrons.l_name"
+            . " FROM books"
+            . " LEFT JOIN checkouts ON books.id = checkouts.book_id"
+            . " LEFT JOIN patrons ON checkouts.patron_id = patrons.id"
+            . " ORDER BY books.$sort";
     if ($dir == 0)
     {
         $query .= " DESC";
@@ -124,8 +127,6 @@ else
             "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
     }
     $query = "SELECT * FROM books WHERE " . $query;
-
-    //echo $query5;
     print_table($mysqli, $query);
 }
 ?>
