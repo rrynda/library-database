@@ -128,10 +128,21 @@ else
         {
             $query = "AND";
         }
+/*        $query = "title LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
+            "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
+ */
         $query = "title LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
             "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
     }
-    $query = "SELECT * FROM books WHERE " . $query;
+    //$query = "SELECT * FROM books WHERE " . $query;
+    $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, authors.f_name AS a_f_name, authors.l_name AS a_l_name, patrons.f_name AS p_f_name, patrons.l_name AS p_l_name"
+            . " FROM books"
+            . " LEFT JOIN checkouts ON books.id = checkouts.book_id"
+            . " LEFT JOIN patrons ON checkouts.patron_id = patrons.id"
+            . " LEFT JOIN authors_books ON books.id = authors_books.book_id"
+            . " LEFT JOIN authors ON authors_books.author_id = authors.id"
+            . " WHERE "
+            . $query;
     print_table($mysqli, $query);
 }
 ?>
