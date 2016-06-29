@@ -57,8 +57,10 @@ function print_table($mysqli, $query)
         print_column_header("title", "Title");
         print_column_header("year_published", "Year Published");
         print_column_header("shelf_id", "Shelf ID");
-        print_column_header("f_name", "Patron First Name");
-        print_column_header("l_name", "Patron Last Name");
+        print_column_header("a_f_name", "Author First Name");
+        print_column_header("a_l_name", "Author Last Name");
+        print_column_header("p_f_name", "Patron First Name");
+        print_column_header("p_l_name", "Patron Last Name");
 
         # loop over each book row
         while ($row = $result->fetch_assoc())
@@ -66,7 +68,8 @@ function print_table($mysqli, $query)
             $id = $row["id"];
             //echo "<tr><td><a href='find.php?id=$id'>" . $row["id"] . "</a></td><td><a href='find.php?id=$id'>" . $row["title"] . "</a></td><td><a href='find.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='find.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
             //echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-            echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["l_name"] . "</a></td></tr>\n";
+            //echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["l_name"] . "</a></td></tr>\n";
+            echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["a_f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["a_l_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["p_f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["p_l_name"] . "</a></td></tr>\n";
         }
         echo "</table>";
         ?>
@@ -98,10 +101,12 @@ if(!array_key_exists("search", $_REQUEST))
     }
 
     //$query = "SELECT * FROM books ORDER BY $sort";
-    $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, patrons.f_name, patrons.l_name"
+    $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, authors.f_name AS a_f_name, authors.l_name AS a_l_name, patrons.f_name AS p_f_name, patrons.l_name AS p_l_name"
             . " FROM books"
             . " LEFT JOIN checkouts ON books.id = checkouts.book_id"
             . " LEFT JOIN patrons ON checkouts.patron_id = patrons.id"
+            . " LEFT JOIN authors_books ON books.id = authors_books.book_id"
+            . " LEFT JOIN authors ON authors_books.author_id = authors.id"
             . " ORDER BY books.$sort";
     if ($dir == 0)
     {
