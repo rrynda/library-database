@@ -55,14 +55,37 @@ function print_table($mysqli, $query)
         print_column_header("id", "Patron");
         print_column_header("f_name", "First Name");
         print_column_header("l_name", "Last Name");
+        print_column_header("bid", "Book ID");
+        print_column_header("title", "Title");
 
         # loop over each book row
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
+            //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
+            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
         }
         echo "</table>";
+
+/*        //$name = $row["l_name"] . ", " . $row["f_name"];
+        //$temp = $name;
+        if ( $name == null)
+        {
+            ?>
+            <h5><?$name?></>
+            <table>
+            
+            <?php
+        }
+        else if($name != $temp)
+        {
+            $temp = $name;
+        }
+        else
+        {
+            
+        }
+*/
     }
     else
     {
@@ -75,6 +98,7 @@ if(!array_key_exists("search", $_REQUEST))
     $sort = "id";
     $dir = 1;
     $sortable_columns = array('id', 'f_name', 'l_name');
+
     if (array_key_exists("sort", $_REQUEST) &&
         array_search($_REQUEST["sort"], $sortable_columns))
     {
@@ -87,8 +111,12 @@ if(!array_key_exists("search", $_REQUEST))
     }
 
     //$query = "SELECT * FROM books ORDER BY $sort";
-    $query = "SELECT * FROM patrons ORDER BY $sort";
-    
+    //$query = "SELECT * FROM patrons ORDER BY $sort";
+    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
+            . " FROM patrons"
+            . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
+            . " LEFT JOIN books ON checkouts.book_id = books.id"
+            . " ORDER BY patrons.$sort";    
     if ($dir == 0)
     {
         $query .= " DESC";
@@ -113,7 +141,12 @@ else
             "OR l_name LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
     }
     //$query = "SELECT * FROM books WHERE " . $query;
-    $query = "SELECT * FROM patrons WHERE " . $query;
+    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
+            . " FROM patrons"
+            . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
+            . " LEFT JOIN books ON checkouts.book_id = books.id"
+            . " WHERE "
+            . $query;
     print_table($mysqli, $query);
 }
 ?>
