@@ -1,0 +1,67 @@
+table
+{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    border-collapse: collapse;
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+td,
+th
+{
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+form
+{
+    display: table;
+    margin: 5px;
+}
+
+/*
+form textarea
+{
+    height: 12px;
+    width: 60px;
+    vertical-align: middle;
+}
+*/
+div.search_box input[type="text"]
+{
+    height: 15px;
+    width: 385px;
+    vertical-align: middle;
+}
+
+p.heading
+{
+    font-weight: bold;
+}
+
+div.dropdown
+{
+     
+}
+
+div.date
+{
+    text-align: middle;
+}
+
+div.checkbox
+{
+    padding-left: 15px;
+}
+
+p.succeed
+{
+    color: green;
+}
+
+p.error{
+    color: red;
+}
