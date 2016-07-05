@@ -51,19 +51,57 @@ function print_table($mysqli, $query)
         global $sort;
         global $dir;
 
-        echo "<table><tr>";
-        print_column_header("id", "Patron");
+        //echo "<table><tr>";
+/*        print_column_header("id", "Patron ID");
         print_column_header("f_name", "First Name");
         print_column_header("l_name", "Last Name");
         print_column_header("bid", "Book ID");
         print_column_header("title", "Title");
-
+*/
         # loop over each book row
+        $temp = null;
+        //$counter = 0;
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
-            //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
+            
+            //if ($f_name != $f_temp && $l_name != $l_temp)
+            if ($temp == $id)
+            {
+                //echo $counter . ") Name remains the same.";
+
+                    //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
+                    //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
+                    $counter ++;
+            }
+            else
+            {
+                echo "</table>";
+                
+                //echo $counter . ") Name does not remain the same.";
+                
+                if ($row["bid"] == null)
+                {
+                    $counter = 0;
+                }
+                else
+                {
+                    $counter = 1;
+                }
+                $temp = $id;
+                
+                echo "<h3>" . $row["f_name"] . " " . $row["l_name"] . "     ID: " . $row["id"] . "</h3>";
+                
+                echo "<table><tr>";
+                print_column_header("", "Number of Books");
+                print_column_header("title", "Title");
+                print_column_header("bid", "Book ID");
+                
+                echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
+                $counter++;
+            }
+
         }
         echo "</table>";
 
