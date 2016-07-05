@@ -41,7 +41,7 @@ function print_table($mysqli, $query)
 
                     //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
                     //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
-                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td></tr>\n";
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
                     $counter ++;
             }
             else
@@ -60,9 +60,9 @@ function print_table($mysqli, $query)
                     $counter = 1;
                     echo "<table><tr>";
                     echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
-                    echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
+                    echo "<th>Number of Books</th><th>Title</th><th>Book ID</th><th>Due Date</th>";
 
-                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td></tr>\n";
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
                     $counter++;
                 }
                 
@@ -86,7 +86,7 @@ if(!array_key_exists("search", $_REQUEST))
     $sortable_columns = array('id', 'f_name', 'l_name');
     
     //$query = "SELECT * FROM patrons ORDER BY $sort";
-    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
+    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, checkouts.due_date, books.id AS bid, books.title"
             . " FROM patrons"
             . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
             . " LEFT JOIN books ON checkouts.book_id = books.id"
@@ -115,7 +115,7 @@ else
             "OR l_name LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
     }
     //$query = "SELECT * FROM books WHERE " . $query;
-    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
+    $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, checkouts.due_date, books.id AS bid, books.title"
             . " FROM patrons"
             . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
             . " LEFT JOIN books ON checkouts.book_id = books.id"
