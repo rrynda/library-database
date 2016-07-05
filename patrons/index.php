@@ -81,18 +81,7 @@ if(!array_key_exists("search", $_REQUEST))
     $sort = "id";
     $dir = 1;
     $sortable_columns = array('id', 'f_name', 'l_name');
-
-    if (array_key_exists("sort", $_REQUEST) &&
-        array_search($_REQUEST["sort"], $sortable_columns))
-    {
-        $sort = $_REQUEST["sort"];
-    }
-    if (array_key_exists("dir", $_REQUEST) &&
-        $_REQUEST["dir"] == "0")
-    {
-        $dir = 0;
-    }
-
+    
     //$query = "SELECT * FROM patrons ORDER BY $sort";
     $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
             . " FROM patrons"
