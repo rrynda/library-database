@@ -25,7 +25,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <?php
 
-function print_column_header($name, $description)
+/*function print_column_header($name, $description)
 {
     global $sort;
     global $dir;
@@ -43,14 +43,14 @@ function print_column_header($name, $description)
     }
     echo "</a></th>";
 }
-
+*/
 function print_table($mysqli, $query)
 {
     if ($result = $mysqli->query($query))
     {
-        global $sort;
+/*        global $sort;
         global $dir;
-
+*/
         //echo "<table><tr>";
 /*        print_column_header("id", "Patron ID");
         print_column_header("f_name", "First Name");
@@ -94,9 +94,11 @@ function print_table($mysqli, $query)
                 echo "<h3>" . $row["f_name"] . " " . $row["l_name"] . "     ID: " . $row["id"] . "</h3>";
                 
                 echo "<table><tr>";
-                print_column_header("", "Number of Books");
+/*                print_column_header("", "Number of Books");
                 print_column_header("title", "Title");
                 print_column_header("bid", "Book ID");
+*/
+                echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
                 
                 echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
                 $counter++;
