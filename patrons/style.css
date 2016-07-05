@@ -62,6 +62,17 @@ p.succeed
     color: green;
 }
 
-p.error{
+p.error
+{
     color: red;
+}
+
+th
+{
+    background-color: #99ccff
+}
+
+.center
+{
+    text-align: center;
 }

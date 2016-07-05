@@ -41,7 +41,7 @@ function print_table($mysqli, $query)
 
                     //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
                     //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
-                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td></tr>\n";
                     $counter ++;
             }
             else
@@ -62,7 +62,7 @@ function print_table($mysqli, $query)
                     echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
                     echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
 
-                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td></tr>\n";
                     $counter++;
                 }
                 
