@@ -47,24 +47,27 @@ function print_table($mysqli, $query)
             else
             {
                 echo "</table>";
+                $temp = $id;
+                
                 //echo $counter . ") Name does not remain the same.";
                 if ($row["bid"] == null)
                 {
-                    $counter = 0;
+                    echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
+                    echo "--" . $row["f_name"] . " has no books checked out.";
                 }
                 else
                 {
                     $counter = 1;
+                    echo "<table><tr>";
+                    echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
+                    echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
+
+                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
+                    $counter++;
                 }
-                $temp = $id;
                 
-                echo "<h3>" . $row["f_name"] . " " . $row["l_name"] . "     ID: " . $row["id"] . "</h3>";
                 
-                echo "<table><tr>";
-                echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
                 
-                echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
-                $counter++;
             }
 
         }
