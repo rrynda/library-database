@@ -24,40 +24,10 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 </form>
 
 <?php
-
-/*function print_column_header($name, $description)
-{
-    global $sort;
-    global $dir;
-
-    echo "<th><a href='?sort=$name";
-    if ($sort == $name)
-    {
-        echo "&amp;dir=" . ($dir ? "0" : "1");
-        echo "'>$description";
-        echo " <img src='https://imp.wiktel.com/media/img/admin/arrow-" . ($dir ? "down" : "up") . ".gif'>";
-    }
-    else
-    {
-        echo "'>$description";
-    }
-    echo "</a></th>";
-}
-*/
 function print_table($mysqli, $query)
 {
     if ($result = $mysqli->query($query))
     {
-/*        global $sort;
-        global $dir;
-*/
-        //echo "<table><tr>";
-/*        print_column_header("id", "Patron ID");
-        print_column_header("f_name", "First Name");
-        print_column_header("l_name", "Last Name");
-        print_column_header("bid", "Book ID");
-        print_column_header("title", "Title");
-*/
         # loop over each book row
         $temp = null;
         //$counter = 0;
@@ -65,7 +35,6 @@ function print_table($mysqli, $query)
         {
             $id = $row["id"];
             
-            //if ($f_name != $f_temp && $l_name != $l_temp)
             if ($temp == $id)
             {
                 //echo $counter . ") Name remains the same.";
@@ -78,9 +47,7 @@ function print_table($mysqli, $query)
             else
             {
                 echo "</table>";
-                
                 //echo $counter . ") Name does not remain the same.";
-                
                 if ($row["bid"] == null)
                 {
                     $counter = 0;
@@ -94,10 +61,6 @@ function print_table($mysqli, $query)
                 echo "<h3>" . $row["f_name"] . " " . $row["l_name"] . "     ID: " . $row["id"] . "</h3>";
                 
                 echo "<table><tr>";
-/*                print_column_header("", "Number of Books");
-                print_column_header("title", "Title");
-                print_column_header("bid", "Book ID");
-*/
                 echo "<th>Number of Books</th><th>Title</th><th>Book ID</th>";
                 
                 echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td>" . $row["bid"] . "</td></tr>\n";
@@ -106,26 +69,6 @@ function print_table($mysqli, $query)
 
         }
         echo "</table>";
-
-/*        //$name = $row["l_name"] . ", " . $row["f_name"];
-        //$temp = $name;
-        if ( $name == null)
-        {
-            ?>
-            <h5><?$name?></>
-            <table>
-            
-            <?php
-        }
-        else if($name != $temp)
-        {
-            $temp = $name;
-        }
-        else
-        {
-            
-        }
-*/
     }
     else
     {
@@ -150,13 +93,12 @@ if(!array_key_exists("search", $_REQUEST))
         $dir = 0;
     }
 
-    //$query = "SELECT * FROM books ORDER BY $sort";
     //$query = "SELECT * FROM patrons ORDER BY $sort";
     $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, books.id AS bid, books.title"
             . " FROM patrons"
             . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
             . " LEFT JOIN books ON checkouts.book_id = books.id"
-            . " ORDER BY patrons.$sort";    
+            . " ORDER BY patrons.$sort";
     if ($dir == 0)
     {
         $query .= " DESC";
