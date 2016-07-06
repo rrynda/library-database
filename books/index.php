@@ -15,7 +15,6 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View All Books</a></h4>
-<!-- <h4><a href='find.php'>Find a Book</a></h4> -->
 
 <form>
 <div class="search_box">
@@ -66,9 +65,6 @@ function print_table($mysqli, $query)
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
-            //echo "<tr><td><a href='find.php?id=$id'>" . $row["id"] . "</a></td><td><a href='find.php?id=$id'>" . $row["title"] . "</a></td><td><a href='find.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='find.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-            //echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td></tr>\n";
-            //echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["l_name"] . "</a></td></tr>\n";
             echo "<tr><td><a href='edit.php?id=$id'>" . $row["id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["title"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["year_published"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["shelf_id"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["a_f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["a_l_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["p_f_name"] . "</a></td><td><a href='edit.php?id=$id'>" . $row["p_l_name"] . "</a></td></tr>\n";
         }
         echo "</table>";
@@ -101,8 +97,6 @@ if(!array_key_exists("search", $_REQUEST))
     {
         $dir = 0;
     }
-
-    //$query = "SELECT * FROM books ORDER BY $sort";
     $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, authors.f_name AS a_f_name, authors.l_name AS a_l_name, patrons.f_name AS p_f_name, patrons.l_name AS p_l_name"
             . " FROM books"
             . " LEFT JOIN checkouts ON books.id = checkouts.book_id"
@@ -111,15 +105,6 @@ if(!array_key_exists("search", $_REQUEST))
             . " LEFT JOIN authors ON authors_books.author_id = authors.id"
             . " ORDER BY books.$sort";
 
-/*    $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, authors.f_name AS a_f_name, authors.l_name AS a_l_name, patrons.f_name AS p_f_name, patrons.l_name AS p_l_name"
-            . " FROM books"
-            . " LEFT JOIN checkouts ON books.id = checkouts.book_id"
-            . " LEFT JOIN patrons ON checkouts.patron_id = patrons.id"
-            . " LEFT JOIN authors_books ON books.id = authors_books.book_id"
-            . " LEFT JOIN authors ON authors_books.author_id = authors.id"
-            //. " ORDER BY books.$sort";
-            . " ORDER BY patrons.$sort";
-*/
     if ($dir == 0)
     {
         $query .= " DESC";
@@ -143,11 +128,7 @@ else
         $query = "title LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
             "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
 
-/*        $query = "title LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
-            "OR year_published LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
-*/
     }
-    //$query = "SELECT * FROM books WHERE " . $query;
     $query = "SELECT books.id, books.title, books.year_published, books.shelf_id, authors.f_name AS a_f_name, authors.l_name AS a_l_name, patrons.f_name AS p_f_name, patrons.l_name AS p_l_name"
             . " FROM books"
             . " LEFT JOIN checkouts ON books.id = checkouts.book_id"

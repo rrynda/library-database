@@ -26,16 +26,12 @@ function print_table($mysqli, $query)
     {
         # loop over each book row
         $temp = null;
-        //$counter = 0;
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
             
             if ($temp == $id)
             {
-                //echo $counter . ") Name remains the same.";
-                //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
-                //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
                 echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
                 $counter ++;
             }
@@ -50,8 +46,6 @@ function print_table($mysqli, $query)
                     echo "</table>\n";
                 }
                 $temp = $id;
-                
-                //echo $counter . ") Name does not remain the same.";
                 if ($row["bid"] == null)
                 {
                     echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";

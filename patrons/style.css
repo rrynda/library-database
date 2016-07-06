@@ -22,14 +22,6 @@ form
     margin: 5px;
 }
 
-/*
-form textarea
-{
-    height: 12px;
-    width: 60px;
-    vertical-align: middle;
-}
-*/
 div.search_box input[type="text"]
 {
     height: 15px;
