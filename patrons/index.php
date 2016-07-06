@@ -3,19 +3,15 @@
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?>
-
 <html>
 <head>
 <link href="style.css" type="text/css" rel="stylesheet">
 <title>View Patrons</title>
 </head>
-
 <body>
 <h2>View Patrons</h2>
-
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View All Patrons</a></h4>
-
 <form>
 <div class="search_box">
     <input type="submit" value="Search">
@@ -34,16 +30,14 @@ function print_table($mysqli, $query)
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
-            //$first_loop = 1;
             
             if ($temp == $id)
             {
                 //echo $counter . ") Name remains the same.";
-
-                    //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
-                    //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
-                    echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
-                    $counter ++;
+                //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td></tr>\n";
+                //echo "<tr><td>" . $row["id"] . "</td><td>" . $row["f_name"] . "</td><td>" . $row["l_name"] . "</td><td>" . $row["bid"] . "</td><td>" . $row["title"] . "</td></tr>\n";
+                echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
+                $counter ++;
             }
             else
             {
@@ -55,7 +49,6 @@ function print_table($mysqli, $query)
                 {
                     echo "</table>\n";
                 }
-                //echo "</table>\n";
                 $temp = $id;
                 
                 //echo $counter . ") Name does not remain the same.";
@@ -91,7 +84,6 @@ if(!array_key_exists("search", $_REQUEST))
     $dir = 1;
     $sortable_columns = array('id', 'f_name', 'l_name');
     
-    //$query = "SELECT * FROM patrons ORDER BY $sort";
     $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, checkouts.due_date, books.id AS bid, books.title"
             . " FROM patrons"
             . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
@@ -101,7 +93,6 @@ if(!array_key_exists("search", $_REQUEST))
     {
         $query .= " DESC";
     }
-
     print_table($mysqli, $query);
 }
 else
@@ -120,7 +111,6 @@ else
         $query = "f_name LIKE '%" . $mysqli->real_escape_string($piece) . "%'" .
             "OR l_name LIKE '%" . $mysqli->real_escape_string($piece) . "%'";
     }
-    //$query = "SELECT * FROM books WHERE " . $query;
     $query = "SELECT patrons. id, patrons.f_name, patrons.l_name, checkouts.due_date, books.id AS bid, books.title"
             . " FROM patrons"
             . " LEFT JOIN checkouts ON patrons.id = checkouts.patron_id"
