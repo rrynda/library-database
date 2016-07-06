@@ -73,9 +73,11 @@ function print_table($mysqli, $query)
         }
         echo "</table>";
         ?>
-        <p>
-        <a href='edit.php'><input type="submit" value="Add a Book"></a>
-        </p>
+        <form action="edit.php">
+        <div class="add_button">
+            <input type="submit" value="Add a Book">
+        </div>
+        </form>
         <?php
     }
     else
