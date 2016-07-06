@@ -5,8 +5,8 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?>
 <html>
 <head>
-<link href="style.css" type="text/css" rel="stylesheet">
-<title>View Patrons</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>View Patrons</title>
 </head>
 <body>
 <h2>View Patrons</h2>

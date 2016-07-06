@@ -3,16 +3,11 @@
 require_once(dirname($_SERVER["DOCUMENT_ROOT"]) . "/lib/mysql_db.inc.php");
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?>
-
 <html>
 <head>
-
-<link href="style.css" type="text/css" rel="stylesheet">
-
-<title>Delete a Book</title>
-
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Delete a Book</title>
 </head>
-
 <body>
 <h2>Delete a Book</h2>
 
