@@ -34,7 +34,7 @@ if ($result = $mysqli->query($query1))
         echo "<ul><li>Book ID: " . $row["id"]  . "</li>\n";
         echo "<li>Title: " . $row["title"] . "</li>\n";
         echo "<li>Year Published: " . $row["year_published"] . "</li>\n";
-        echo "<li>Shelf ID: " . $row["shelf_id"] . "</li></ul></form>\n";
+        echo "<li>Shelf ID: " . $row["shelf_id"] . "</li></ul>\n";
 
         $title = $row["title"];
         if(!array_key_exists("delete", $_POST))
