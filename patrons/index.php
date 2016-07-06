@@ -12,6 +12,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 <h2>View Patrons</h2>
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View All Patrons</a></h4>
+
 <form>
 <div class="search_box">
     <input type="submit" value="Search">

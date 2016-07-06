@@ -10,7 +10,6 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 </head>
 <body>
 <h2>Delete a Book</h2>
-
 <h4><a href='../'>Home</a></h4>
 <h4><a href='./'>View All Books</a></h4>
 
