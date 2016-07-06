@@ -13,3 +13,6 @@
 <h4><a href='books/'>View Books</a></h4>
 <h4><a href=''>View Authors</a></h4>
 <h4><a href='patrons/'>View Patrons</a></h4>
+
+</body>
+</html>
