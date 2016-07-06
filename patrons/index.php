@@ -47,7 +47,15 @@ function print_table($mysqli, $query)
             }
             else
             {
-                echo "</table>\n";
+                if ($temp == null)
+                {
+                    
+                }
+                else
+                {
+                    echo "</table>\n";
+                }
+                //echo "</table>\n";
                 $temp = $id;
                 
                 //echo $counter . ") Name does not remain the same.";
@@ -55,6 +63,7 @@ function print_table($mysqli, $query)
                 {
                     echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
                     echo "--" . $row["f_name"] . " has no books checked out.";
+                    $temp = null;
                 }
                 else
                 {
