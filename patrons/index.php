@@ -34,6 +34,7 @@ function print_table($mysqli, $query)
         while ($row = $result->fetch_assoc())
         {
             $id = $row["id"];
+            //$first_loop = 1;
             
             if ($temp == $id)
             {
@@ -46,7 +47,7 @@ function print_table($mysqli, $query)
             }
             else
             {
-                echo "</table>";
+                echo "</table>\n";
                 $temp = $id;
                 
                 //echo $counter . ") Name does not remain the same.";
@@ -58,18 +59,14 @@ function print_table($mysqli, $query)
                 else
                 {
                     $counter = 1;
-                    echo "<table><tr>";
                     echo "<h3>ID: " . $row["id"] . " Name: " . $row["l_name"] . ", " . $row["f_name"] . "</h3>";
+                    echo "<table><tr>";
                     echo "<th>Number of Books</th><th>Title</th><th>Book ID</th><th>Due Date</th>";
 
                     echo "<tr><td>" . $counter . "</td><td>" . $row["title"] . "</td><td class='center'>" . $row["bid"] . "</td><td>" . $row["due_date"] . "</td></tr>\n";
                     $counter++;
                 }
-                
-                
-                
             }
-
         }
         echo "</table>";
     }
